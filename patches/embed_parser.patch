@@ -1,0 +1,23 @@
+*** Begin Patch
+*** Update File: plugins/platforms/discord/adapter.py
+@@ raw_content @@
+-        raw_content = message.content.strip()
+-        normalized_content = raw_content
++        raw_content = message.content.strip()
++        normalized_content = raw_content
++        
++        # Extract content from embeds (for bots like Glint that send embeds)
++        if not raw_content and hasattr(message, 'embeds') and message.embeds:
++            embed_parts = []
++            for embed in message.embeds:
++                if embed.title:
++                    embed_parts.append(f"Title: {embed.title}")
++                if embed.description:
++                    embed_parts.append(embed.description)
++                for field in (embed.fields or []):
++                    if field.name:
++                        embed_parts.append(f"{field.name}: {field.value}" if field.value else field.name)
++            if embed_parts:
++                raw_content = "\n".join(embed_parts)
++                normalized_content = raw_content
+*** End Patch

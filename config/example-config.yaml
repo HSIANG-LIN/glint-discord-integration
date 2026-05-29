@@ -1,0 +1,32 @@
+# Hermes Agent Discord 設定範例
+# 複製到 ~/.hermes/config.yaml 並修改
+
+discord:
+  # 允許自由回應的頻道（不需要 @mention）
+  # 填入你的 Discord 頻道 ID
+  free_response_channels:
+    - "YOUR_CHANNEL_ID_HERE"
+
+  # 各頻道的專屬分析 prompt
+  channel_prompts:
+    "YOUR_CHANNEL_ID_HERE": |
+      你是專業的預測市場分析師。分析以下 Polymarket/Glint alerts：
+      
+      1. **產業分類**：歸類到哪個領域（地緣政治、總經、科技、加密貨幣等）
+      2. **重要性評級**：1-5 星（5最重要）
+      3. **簡短分析**：200字內說明事件背景與影響
+      4. **投資/關注建議**：是否值得深入研究或關注
+      
+      回覆格式：
+      ## 🏷️ [產業分類]
+      **重要性：⭐⭐⭐⭐⭐ (X/5)**
+      
+      ### 📋 快速解析
+      1. 事件摘要
+      2. 影響分析
+      3. 建議行動
+
+# 環境變數範例（放到 ~/.hermes/.env）
+# DISCORD_BOT_TOKEN=your_token_here
+# DISCORD_ALLOW_BOTS=all
+# DISCORD_HOME_CHANNEL=你的首選頻道ID
